@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BURGZ Delivery — Produto</title>
+
+  <!-- Google Ads -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18137498013"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-18137498013');
+  </script>
+
+  <!-- Meta Pixel -->
+  <script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '69f937f98d8afd7614d363e1');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=69f937f98d8afd7614d363e1&ev=PageView&noscript=1"/></noscript>
+
+  <!-- UTMify Pixel -->
+  <script>
+    window.googlePixelId = "68790cbeda00c26c43b3fa8b";
+    var _a = document.createElement("script");
+    _a.setAttribute("async",""); _a.setAttribute("defer","");
+    _a.setAttribute("src","https://cdn.utmify.com.br/scripts/pixel/pixel-google.js");
+    document.head.appendChild(_a);
+  </script>
+  <script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async defer></script>
+
+  <!-- Fonts & ícones -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      color: #1a1a1a;
+      background: #f9fafb;
+      min-height: 100vh;
+    }
+    a { color: #1a1a1a; text-decoration: none; }
+    img { max-width: 100%; }
+
+    /* ── Topbar ── */
+    .bz-topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #15803d;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      height: 52px;
+      gap: 12px;
+    }
+    .bz-back-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.2);
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      flex-shrink: 0;
+      transition: background .15s;
+    }
+    .bz-back-btn:hover { background: rgba(255,255,255,.35); }
+    .bz-topbar-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* ── Page container ── */
+    .bz-page {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 0 0 100px;
+    }
+
+    /* ── Product image ── */
+    .bz-prod-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: #e5e7eb;
+      overflow: hidden;
+      position: relative;
+    }
+    .bz-prod-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ── Product info card ── */
+    .bz-prod-card {
+      background: #fff;
+      border-radius: 0 0 20px 20px;
+      padding: 18px 18px 20px;
+      margin-bottom: 12px;
+    }
+    .bz-prod-stock {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #b91c1c;
+      background: #fee2e2;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-bottom: 8px;
+    }
+    .bz-prod-name {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a1a1a;
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+    .bz-prod-desc {
+      font-size: 14px;
+      color: #4b5563;
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+    .bz-prod-prices {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .bz-prod-old-price {
+      font-size: 14px;
+      color: #ef4444;
+      text-decoration: line-through;
+    }
+    .bz-prod-new-price {
+      font-size: 26px;
+      font-weight: 700;
+      color: #15803d;
+      line-height: 1;
+    }
+    .bz-prod-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      background: #dcfce7;
+      color: #15803d;
+      padding: 3px 9px;
+      border-radius: 20px;
+    }
+
+    /* ── Extras section ── */
+    .bz-section-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 16px 18px;
+      margin: 0 0 12px;
+    }
+    .bz-extras-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 4px;
+    }
+    .bz-extras-subtitle {
+      font-size: 12px;
+      color: #6b7280;
+      margin-bottom: 14px;
+    }
+    .bz-extra-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #f1f5f9;
+      gap: 10px;
+      cursor: pointer;
+    }
+    .bz-extra-item:last-child { border-bottom: none; }
+    .bz-extra-item label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      flex: 1;
+    }
+    .bz-extra-item input[type="checkbox"] { display: none; }
+    .bz-extra-check {
+      width: 22px; height: 22px;
+      border-radius: 6px;
+      border: 2px solid #d1d5db;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: border-color .15s, background .15s;
+    }
+    .bz-extra-item input[type="checkbox"]:checked + .bz-extra-check {
+      background: #15803d;
+      border-color: #15803d;
+    }
+    .bz-extra-item input[type="checkbox"]:checked + .bz-extra-check::after {
+      content: '\f00c';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      color: #fff;
+      font-size: 12px;
+    }
+    .bz-extra-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1a1a1a;
+    }
+    .bz-extra-price {
+      font-size: 12px;
+      color: #15803d;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    /* ── Observation ── */
+    .bz-obs-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 8px;
+      display: block;
+    }
+    .bz-obs-input {
+      width: 100%;
+      border: 2px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      color: #1a1a1a;
+      resize: none;
+      outline: none;
+      transition: border-color .15s;
+    }
+    .bz-obs-input:focus { border-color: #15803d; }
+    .bz-obs-count {
+      font-size: 11px;
+      color: #9ca3af;
+      text-align: right;
+      margin-top: 4px;
+    }
+
+    /* ── Sticky CTA ── */
+    .bz-cta-bar {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 200;
+      padding: 12px 16px;
+      background: #fff;
+      border-top: 1px solid #e5e7eb;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    /* center the bar within max-width */
+    @media (min-width: 640px) {
+      .bz-cta-bar { left: 50%; right: auto; transform: translateX(-50%); width: 640px; border-radius: 0; }
+    }
+    .bz-cta-btn {
+      flex: 1;
+      background: #15803d;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 14px 20px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background .15s;
+    }
+    .bz-cta-btn:hover { background: #166534; }
+    .bz-cta-btn:active { background: #14532d; transform: scale(.98); }
+
+    /* ── Not found ── */
+    .bz-not-found {
+      text-align: center;
+      padding: 60px 20px;
+    }
+    .bz-not-found p { font-size: 15px; color: #6b7280; margin-bottom: 20px; }
+    .bz-not-found a {
+      display: inline-block;
+      background: #15803d;
+      color: #fff;
+      padding: 12px 28px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Topbar ── -->
+  <div class="bz-topbar">
+    <button class="bz-back-btn" onclick="history.back()" aria-label="Voltar">
+      <i class="fa-solid fa-arrow-left"></i>
+    </button>
+    <span class="bz-topbar-title" id="topbar-title">BURGZ Delivery</span>
+  </div>
+
+  <!-- ── Page ── -->
+  <div class="bz-page" id="bz-page">
+    <!-- preenchido por JS -->
+  </div>
+
+  <!-- ── CTA fixo ── -->
+  <div class="bz-cta-bar" id="bz-cta-bar" style="display:none">
+    <button class="bz-cta-btn" id="bz-cta-btn" onclick="finalizarPedido()">
+      <i class="fa-solid fa-bag-shopping"></i> FINALIZAR PEDIDO
+    </button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+  // ══ ARRAY DE PRODUTOS ══
+  var PRODUTOS = [
+    {
+      id: 'combo01',
+      nome: '2X COMBO Crispy Bacon em dobro + 2X Coca-Cola + 2X Batatas Fritas',
+      desc: '2X Smash Crispy Bacon: pão brioche, blend bovino 150g, queijo cheddar, bacon crocante, molho especial da casa. Acompanha 2X Coca-Cola e 2X porções de batatas fritas.',
+      precoAntigo: '€24,90',
+      preco: '€12,90',
+      img: 'images/combo1.webp',
+      estoque: 26,
+      link: 'https://seguro.centrodelivery.shop/api/public/shopify?product=2242588386846&store=22425'
+    },
+    {
+      id: 'combo02',
+      nome: 'COMBO Família — 5 Lanches + Refrigerante + Batatas Fritas',
+      desc: '5X Smash Burguers variados (Classic, Bacon, Cheddar), acompanha Coca-Cola 2L e 500g de batatas fritas crocantes. Ideal para reunir a família!',
+      precoAntigo: '€34,90',
+      preco: '€14,90',
+      img: 'images/combo2.webp',
+      estoque: 26,
+      link: 'https://seguro.centrodelivery.shop/api/public/shopify?product=2242541862394&store=22425'
+    },
+    {
+      id: 'combo03',
+      nome: 'RODÍZIO EM CASA — 6X Hambúrgueres + 500g Batatas + 500g Nuggets + 2X Coca-Cola 2L + 4 Molhos Especiais',
+      desc: '6X Smash Burguers sortidos, 500g de batatas fritas crocantes, 500g de nuggets empanados, 2X Coca-Cola 2L e 4 molhos especiais da casa. O verdadeiro rodízio em casa!',
+      precoAntigo: '€39,90',
+      preco: '€18,90',
+      img: 'images/combo3.webp',
+      estoque: 26,
+      link: 'https://seguro.centrodelivery.shop/api/public/shopify?product=2242596419126&store=22425'
+    },
+    {
+      id: 'combo04',
+      nome: 'COMBO Trio Smash — 3X Classic Smash Burguer + 500g Batatas + Coca-Cola 2L',
+      desc: '3X Classic Smash Burguer com pão brioche, blend bovino 150g, queijo cheddar, alface, tomate e molho especial. Acompanha 500g de batatas fritas crocantes e Coca-Cola 2L.',
+      precoAntigo: '€24,90',
+      preco: '€13,90',
+      img: 'images/combo4.webp',
+      estoque: 26,
+      link: 'https://seguro.centrodelivery.shop/api/public/shopify?product=2242545957649&store=22425'
+    },
+    {
+      id: 'combo05',
+      nome: 'COMBO Solteiro — 1X Classic Chicken + Coca-Cola + 500g Batatas Fritas',
+      desc: '1X Classic Chicken Burguer com pão brioche, filé de frango empanado, queijo cheddar, alface, tomate e molho ranch. Acompanha Coca-Cola e 500g de batatas fritas.',
+      precoAntigo: '€17,90',
+      preco: '€8,90',
+      img: 'images/combo5.webp',
+      estoque: 26,
+      link: 'https://seguro.centrodelivery.shop/api/public/shopify?product=2242533646793&store=22425'
+    },
+    {
+      id: 'combo06',
+      nome: 'COMBO Classic Cheddar Individual + Coca-Cola + Batatas Fritas',
+      desc: '1X Classic Cheddar Smash com pão brioche, blend bovino 150g, queijo cheddar cremoso, cebola caramelizada e molho especial. Acompanha Coca-Cola e porção de batatas fritas.',
+      precoAntigo: '€12,90',
+      preco: '€6,90',
+      img: 'images/combo6.webp',
+      estoque: 26,
+      link: 'https://seguro.centrodelivery.shop/api/public/shopify?product=2242573529852&store=22425'
+    },
+    {
+      id: 'combo07',
+      nome: 'COMBO Classic Onion Rings Individual + Coca-Cola + Batatas Fritas',
+      desc: 'Anéis de cebola empanados e crocantes com molho especial da casa. Acompanha 1 Coca-Cola gelada e porção de batatas fritas.',
+      precoAntigo: '€17,90',
+      preco: '€8,90',
+      img: 'images/yaki1.webp',
+      estoque: 26,
+      link: 'https://seguro.centrodelivery.shop/api/public/shopify?product=2242522216469&store=22425'
+    },
+    {
+      id: 'combo08',
+      nome: 'COMBO Super Costela Classic + Coca-Cola + Batatas Fritas',
+      desc: 'Super Costela Classic: Hambúrguer de costela bovina suculento com pão brioche, queijo cheddar, cebola caramelizada e molho especial da casa. Acompanha 1 Coca-Cola gelada e batatas fritas.',
+      precoAntigo: '€19,90',
+      preco: '€11,90',
+      img: 'images/yaki2.webp',
+      estoque: 26,
+      link: 'https://seguro.centrodelivery.shop/api/public/shopify?product=2242591534899&store=22425'
+    },
+    {
+      id: 'combo09',
+      nome: 'COMBO Classic Chicken + Coca-Cola + Batatas Fritas',
+      desc: 'Classic Chicken: Frango empanado crocante com pão brioche, alface, tomate e maionese especial da casa. Acompanha 1 Coca-Cola gelada e porção de batatas fritas.',
+      precoAntigo: '€14,90',
+      preco: '€5,90',
+      img: 'images/yaki3.webp',
+      estoque: 26,
+      link: 'https://seguro.centrodelivery.shop/api/public/shopify?product=2242518664487&store=22425'
+    },
+    {
+      id: 'combo10',
+      nome: '2X COMBO Classic Salada + 2X Coca-Cola + Batatas Fritas',
+      desc: '2X Classic Salada: Pão brioche, blend bovino 150g, queijo cheddar, alface, tomate e molho especial da casa. Acompanha 2X Coca-Cola gelada e porção de batatas fritas.',
+      precoAntigo: '€22,90',
+      preco: '€12,90',
+      img: 'images/yaki4.webp',
+      estoque: 26,
+      link: 'https://seguro.centrodelivery.shop/api/public/shopify?product=2242535351714&store=22425'
+    },
+    {
+      id: 'combo11',
+      nome: 'Classic Smash Burguer + Coca-Cola + Batatas Fritas',
+      desc: 'Classic Smash Burguer: Pão brioche, blend bovino 150g smashado na chapa, queijo cheddar derretido, picles e molho especial da casa. Acompanha 1 Coca-Cola gelada e batatas fritas.',
+      precoAntigo: '€12,90',
+      preco: '€5,90',
+      img: 'images/yaki5.webp',
+      estoque: 26,
+      link: 'https://seguro.centrodelivery.shop/api/public/shopify?product=2242527133852&store=22425'
+    },
+    {
+      id: 'combo12',
+      nome: 'COMBO Batatas Fritas + Frango Frito + Nuggets',
+      desc: '350g das nossas deliciosas batatas fritas (à sua escolha) + 8 suculentos frangos fritos + 15 nuggets quentinhos! Acompanhados de 2X Coca-Cola para o COMBO PERFEITO!',
+      precoAntigo: '€24,90',
+      preco: '€13,90',
+      img: 'images/yaki6.webp',
+      estoque: 8,
+      link: 'https://seguro.centrodelivery.shop/api/public/shopify?product=2242594768369&store=22425'
+    },
+    {
+      id: 'combo13',
+      nome: '1X Classic Salada + 1 Coca-Cola + Batatas Fritas',
+      desc: 'O combo clássico que adora! Um delicioso Classic Salada acompanhado de 1 Coca-Cola gelada e batatas fritas crocantes. Perfeito para uma refeição completa e saborosa!',
+      precoAntigo: '€11,90',
+      preco: '€5,90',
+      img: 'images/yaki7.webp',
+      estoque: 8,
+      link: 'https://seguro.centrodelivery.shop/api/public/shopify?product=2242549351661&store=22425'
+    }
+  ];
+
+  var EXTRAS = [
+    'BATATA CLÁSSICA',
+    'BATATA CHEDDAR E BACON',
+    'BATATA COM PÁPRICA PICANTE',
+    'BATATA COM CATUPIRY',
+    'GELEIA DE PIMENTA',
+    'GELEIA DE BACON'
+  ];
+
+  // ── UTM Propagation ──
+  (function(){
+    var KEYS = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid'];
+    var stored = {};
+    var qs = new URLSearchParams(location.search);
+    KEYS.forEach(function(k){
+      var v = qs.get(k);
+      if (v){ stored[k]=v; localStorage.setItem('bz_'+k,v); }
+      else { var ls=localStorage.getItem('bz_'+k); if(ls) stored[k]=ls; }
+    });
+    window._bzUtms = stored;
+    window._bzUtmKeys = KEYS;
+  })();
+
+  function buildLinkWithUtms(baseUrl){
+    var KEYS = window._bzUtmKeys || [];
+    var stored = window._bzUtms || {};
+    var sep = baseUrl.indexOf('?') !== -1 ? '&' : '?';
+    var extra = '';
+    KEYS.forEach(function(k){
+      if(stored[k]){ extra += sep + k + '=' + encodeURIComponent(stored[k]); sep='&'; }
+    });
+    return baseUrl + extra;
+  }
+
+  // ── Render produto ──
+  var currentProduto = null;
+
+  function renderPage(){
+    var params = new URLSearchParams(location.search);
+    var id = params.get('id');
+    var produto = null;
+    for (var i = 0; i < PRODUTOS.length; i++){
+      if (PRODUTOS[i].id === id){ produto = PRODUTOS[i]; break; }
+    }
+
+    var page = document.getElementById('bz-page');
+
+    if (!produto){
+      page.innerHTML =
+        '<div class="bz-not-found">' +
+        '<p>Produto não encontrado.</p>' +
+        '<a href="index.html">← Ver todos os combos</a>' +
+        '</div>';
+      return;
+    }
+
+    currentProduto = produto;
+    document.title = 'BURGZ Delivery — ' + produto.nome;
+    document.getElementById('topbar-title').textContent = produto.nome;
+
+    // Extras HTML
+    var extrasHtml = EXTRAS.map(function(extra, i){
+      return '<div class="bz-extra-item" onclick="toggleExtra('+i+')">' +
+        '<label for="extra-'+i+'">' +
+        '<input type="checkbox" id="extra-'+i+'" name="extra">' +
+        '<span class="bz-extra-check"></span>' +
+        '<span class="bz-extra-name">'+extra+'</span>' +
+        '</label>' +
+        '<span class="bz-extra-price">Grátis no 1.º pedido</span>' +
+        '</div>';
+    }).join('');
+
+    page.innerHTML =
+      '<div class="bz-prod-img">' +
+        '<img src="'+produto.img+'" alt="'+produto.nome+'" id="prod-main-img">' +
+      '</div>' +
+
+      '<div class="bz-prod-card">' +
+        '<div class="bz-prod-stock">' +
+          '<i class="fa-solid fa-fire"></i> apenas '+produto.estoque+' combos disponíveis' +
+        '</div>' +
+        '<h1 class="bz-prod-name">'+produto.nome+'</h1>' +
+        '<p class="bz-prod-desc">'+produto.desc+'</p>' +
+        '<div class="bz-prod-prices">' +
+          '<span class="bz-prod-old-price">De '+produto.precoAntigo+'</span>' +
+          '<span class="bz-prod-new-price">'+produto.preco+'</span>' +
+        '</div>' +
+        '<div style="margin-top:10px">' +
+          '<span class="bz-prod-tag"><i class="fa fa-truck" style="font-size:10px"></i> Entrega Grátis</span>' +
+        '</div>' +
+      '</div>' +
+
+      '<div class="bz-section-card">' +
+        '<div class="bz-extras-title">Extras</div>' +
+        '<div class="bz-extras-subtitle">Selecione os que desejar — todos grátis no 1.º pedido</div>' +
+        extrasHtml +
+      '</div>' +
+
+      '<div class="bz-section-card">' +
+        '<label class="bz-obs-label" for="obs-input">Adicionar algum detalhe?</label>' +
+        '<textarea id="obs-input" class="bz-obs-input" rows="3" maxlength="140" placeholder="Escreva o detalhe aqui..." oninput="updateObsCount()"></textarea>' +
+        '<div class="bz-obs-count"><span id="obs-count">0</span>/140</div>' +
+      '</div>';
+
+    // Mostrar CTA
+    document.getElementById('bz-cta-bar').style.display = 'flex';
+
+    // Tracking ViewContent
+    if (typeof fbq !== 'undefined'){
+      fbq('track', 'ViewContent', {
+        content_name: produto.nome,
+        content_ids: [produto.id],
+        content_type: 'product',
+        currency: 'EUR'
+      });
+    }
+  }
+
+  function toggleExtra(i){
+    var cb = document.getElementById('extra-'+i);
+    if (cb) cb.checked = !cb.checked;
+  }
+
+  function updateObsCount(){
+    var inp = document.getElementById('obs-input');
+    var cnt = document.getElementById('obs-count');
+    if (inp && cnt) cnt.textContent = inp.value.length;
+  }
+
+  // ── Finalizar pedido ──
+  function finalizarPedido(){
+    if (!currentProduto) return;
+
+    Swal.fire({
+      title: 'Deseja que entreguemos agora?',
+      showDenyButton: true,
+      confirmButtonText: 'Sim, por favor! 🚀',
+      confirmButtonColor: '#15803d',
+      denyButtonText: 'Não, quero agendar a entrega',
+      denyButtonColor: '#6b7280',
+      allowOutsideClick: false
+    }).then(function(result){
+      if (result.isConfirmed){
+        // Entrega imediata
+        trackAndRedirect();
+      } else if (result.isDenied){
+        // Agendar entrega
+        agendarEntrega();
+      }
+    });
+  }
+
+  function agendarEntrega(){
+    var now = new Date();
+    // mínimo: 30 minutos a partir de agora
+    now.setMinutes(now.getMinutes() + 30);
+    var minVal = now.toISOString().slice(0,16);
+
+    Swal.fire({
+      title: '📅 Agendar entrega',
+      html:
+        '<p style="font-size:14px;color:#4b5563;margin-bottom:12px">Selecione a data e hora desejadas:</p>' +
+        '<input type="datetime-local" id="swal-dt" class="swal2-input" min="'+minVal+'" style="font-size:15px">',
+      confirmButtonText: 'Confirmar agendamento',
+      confirmButtonColor: '#15803d',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+      cancelButtonColor: '#9ca3af',
+      allowOutsideClick: false,
+      didOpen: function(){
+        var dt = document.getElementById('swal-dt');
+        dt.min = minVal;
+        dt.value = minVal;
+      },
+      preConfirm: function(){
+        var v = document.getElementById('swal-dt').value;
+        if (!v){
+          Swal.showValidationMessage('Selecione uma data e hora para a entrega.');
+          return false;
+        }
+        var selected = new Date(v);
+        var minimum = new Date(minVal);
+        if (selected < minimum){
+          Swal.showValidationMessage('Selecione uma hora com pelo menos 30 minutos de antecedência.');
+          return false;
+        }
+        return v;
+      }
+    }).then(function(result){
+      if (result.isConfirmed && result.value){
+        var dt = new Date(result.value);
+        var formatted = dt.toLocaleDateString('pt-PT', {
+          day: '2-digit', month: '2-digit', year: 'numeric',
+          hour: '2-digit', minute: '2-digit'
+        });
+        Swal.fire({
+          icon: 'success',
+          title: 'Entrega agendada!',
+          html: '<p style="font-size:14px">O seu pedido será entregue a <b>'+formatted+'</b>.</p>',
+          confirmButtonText: 'Continuar para o pagamento',
+          confirmButtonColor: '#15803d'
+        }).then(function(){
+          trackAndRedirect();
+        });
+      }
+    });
+  }
+
+  function trackAndRedirect(){
+    if (typeof fbq !== 'undefined'){
+      fbq('track', 'InitiateCheckout', {
+        content_name: currentProduto.nome,
+        content_ids: [currentProduto.id],
+        content_type: 'product',
+        currency: 'EUR'
+      });
+    }
+    var url = buildLinkWithUtms(currentProduto.link);
+    setTimeout(function(){ window.location.href = url; }, 300);
+  }
+
+  // ── Init ──
+  renderPage();
+  </script>
+
+</body>
+</html>
