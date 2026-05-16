@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BURGZ Delivery — Hambúrgueres em Portugal</title>
+  <title>BURGZ Delivery — Hambúrgueres & Entregas em Portugal</title>
 
   <!-- Google Ads -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18137498013"></script>
@@ -428,8 +428,8 @@
 
       <!-- Banners -->
       <div style="margin-top:14px">
-        <div class="bz-banner bz-banner-green">
-          <i class="fa fa-truck"></i> Entrega Grátis para <b id="banner-city">si</b>!
+        <div class="bz-banner bz-banner-green" id="banner-entrega" style="display:none">
+          <i class="fa fa-truck"></i> Entrega Grátis para <b id="banner-city"></b>!
         </div>
         <div class="bz-banner bz-banner-promo">
           🍫 Compre qualquer combo e ganhe <b>2 Suflair</b> grátis!
@@ -457,7 +457,7 @@
                 <span class="bz-badge bz-badge-orange">🔥 Mais Pedido</span>
               </div>
               <h3 class="bz-card-title">2X COMBO Crispy Bacon + 2X Coca-Cola + 2X Batatas Fritas</h3>
-              <span class="bz-card-desc">2X Smash Crispy Bacon: pão brioche, blend bovino 150g, queijo cheddar, bacon crocante, molho especial. Com 2X Coca-Cola e 2X fritas.</span>
+              <span class="bz-card-desc">2X Smash Crispy Bacon: pão brioche, blend bovino 150g, queijo cheddar, bacon crocante, molho especial. Com 2X Coca-Cola e 2X batatas fritas.</span>
               <span class="bz-card-old-price">De €24,90</span>
               <span class="bz-card-new-price">€12,90</span>
               <span class="bz-card-stock"><i class="fa fa-fire"></i> apenas 26 combos disponíveis</span>
@@ -473,7 +473,7 @@
                 <span class="bz-badge bz-badge-green"><i class="fa fa-truck" style="font-size:9px"></i> Entrega Grátis</span>
               </div>
               <h3 class="bz-card-title">COMBO Família — 5 Lanches + Refrigerante + Batatas Fritas</h3>
-              <span class="bz-card-desc">5X Smash Burguers variados (Classic, Bacon, Cheddar), Coca-Cola 2L e 500g de fritas crocantes. Ideal para reunir a família!</span>
+              <span class="bz-card-desc">5X Smash Burguers variados (Classic, Bacon, Cheddar), Coca-Cola 2L e 500g de batatas fritas crocantes. Ideal para reunir a família!</span>
               <span class="bz-card-old-price">De €34,90</span>
               <span class="bz-card-new-price">€14,90</span>
               <span class="bz-card-stock"><i class="fa fa-fire"></i> apenas 26 combos disponíveis</span>
@@ -490,7 +490,7 @@
                 <span class="bz-badge bz-badge-red">ÚLTIMAS UNIDADES 🔥</span>
               </div>
               <h3 class="bz-card-title">RODÍZIO EM CASA — 6X Hambúrgueres + 500g Batatas + 500g Nuggets + 2X Coca-Cola 2L</h3>
-              <span class="bz-card-desc">6X Smash Burguers sortidos, 500g de fritas, 500g de nuggets, 2X Coca-Cola 2L e 4 molhos especiais da casa.</span>
+              <span class="bz-card-desc">6X Smash Burguers sortidos, 500g de batatas fritas, 500g de nuggets, 2X Coca-Cola 2L e 4 molhos especiais da casa.</span>
               <span class="bz-card-old-price">De €39,90</span>
               <span class="bz-card-new-price">€18,90</span>
               <span class="bz-card-stock"><i class="fa fa-fire"></i> apenas 26 combos disponíveis</span>
@@ -506,7 +506,7 @@
                 <span class="bz-badge bz-badge-green"><i class="fa fa-truck" style="font-size:9px"></i> Entrega Grátis</span>
               </div>
               <h3 class="bz-card-title">COMBO Trio Smash — 3X Classic Smash Burguer + 500g Batatas + Coca-Cola 2L</h3>
-              <span class="bz-card-desc">3X Classic Smash Burguer: pão brioche, blend bovino 150g, queijo cheddar, alface, tomate e molho especial. Com 500g de fritas e Coca-Cola 2L.</span>
+              <span class="bz-card-desc">3X Classic Smash Burguer: pão brioche, blend bovino 150g, queijo cheddar, alface, tomate e molho especial. Com 500g de batatas fritas e Coca-Cola 2L.</span>
               <span class="bz-card-old-price">De €24,90</span>
               <span class="bz-card-new-price">€13,90</span>
               <span class="bz-card-stock"><i class="fa fa-fire"></i> apenas 26 combos disponíveis</span>
@@ -528,7 +528,7 @@
             <div class="bz-card-text">
               <div class="bz-card-badges"><span class="bz-badge bz-badge-green"><i class="fa fa-truck" style="font-size:9px"></i> Entrega Grátis</span></div>
               <h3 class="bz-card-title">COMBO Solteiro — 1X Classic Chicken + Coca-Cola + 500g Batatas Fritas</h3>
-              <span class="bz-card-desc">Classic Chicken Burguer: pão brioche, frango empanado, queijo cheddar, alface, tomate e molho ranch. Com Coca-Cola e 500g de fritas.</span>
+              <span class="bz-card-desc">Classic Chicken Burguer: pão brioche, frango empanado, queijo cheddar, alface, tomate e molho ranch. Com Coca-Cola e 500g de batatas fritas.</span>
               <span class="bz-card-old-price">De €17,90</span>
               <span class="bz-card-new-price">€8,90</span>
               <span class="bz-card-stock"><i class="fa fa-fire"></i> apenas 26 combos disponíveis</span>
@@ -540,7 +540,7 @@
             <div class="bz-card-text">
               <div class="bz-card-badges"><span class="bz-badge bz-badge-green"><i class="fa fa-truck" style="font-size:9px"></i> Entrega Grátis</span></div>
               <h3 class="bz-card-title">COMBO Classic Cheddar Individual + Coca-Cola + Batatas Fritas</h3>
-              <span class="bz-card-desc">Classic Cheddar Smash: pão brioche, blend bovino 150g, cheddar cremoso, cebola caramelizada e molho especial. Com Coca-Cola e fritas.</span>
+              <span class="bz-card-desc">Classic Cheddar Smash: pão brioche, blend bovino 150g, cheddar cremoso, cebola caramelizada e molho especial. Com Coca-Cola e batatas fritas.</span>
               <span class="bz-card-old-price">De €12,90</span>
               <span class="bz-card-new-price">€6,90</span>
               <span class="bz-card-stock"><i class="fa fa-fire"></i> apenas 26 combos disponíveis</span>
@@ -552,7 +552,7 @@
             <div class="bz-card-text">
               <div class="bz-card-badges"><span class="bz-badge bz-badge-green"><i class="fa fa-truck" style="font-size:9px"></i> Entrega Grátis</span></div>
               <h3 class="bz-card-title">COMBO Classic Onion Rings Individual + Coca-Cola + Batatas Fritas</h3>
-              <span class="bz-card-desc">Anéis de cebola empanados e crocantes com molho especial da casa. Acompanha 1 Coca-Cola gelada e fritas.</span>
+              <span class="bz-card-desc">Anéis de cebola empanados e crocantes com molho especial da casa. Acompanha 1 Coca-Cola gelada e batatas fritas.</span>
               <span class="bz-card-old-price">De €17,90</span>
               <span class="bz-card-new-price">€8,90</span>
               <span class="bz-card-stock"><i class="fa fa-fire"></i> apenas 26 combos disponíveis</span>
@@ -564,7 +564,7 @@
             <div class="bz-card-text">
               <div class="bz-card-badges"><span class="bz-badge bz-badge-green"><i class="fa fa-truck" style="font-size:9px"></i> Entrega Grátis</span></div>
               <h3 class="bz-card-title">COMBO Super Costela Classic + Coca-Cola + Batatas Fritas</h3>
-              <span class="bz-card-desc">Hambúrguer de costela bovina suculento: pão brioche, cheddar, cebola caramelizada e molho especial. Com Coca-Cola e fritas.</span>
+              <span class="bz-card-desc">Hambúrguer de costela bovina suculento: pão brioche, cheddar, cebola caramelizada e molho especial. Com Coca-Cola e batatas fritas.</span>
               <span class="bz-card-old-price">De €19,90</span>
               <span class="bz-card-new-price">€11,90</span>
               <span class="bz-card-stock"><i class="fa fa-fire"></i> apenas 26 combos disponíveis</span>
@@ -576,7 +576,7 @@
             <div class="bz-card-text">
               <div class="bz-card-badges"><span class="bz-badge bz-badge-green"><i class="fa fa-truck" style="font-size:9px"></i> Entrega Grátis</span></div>
               <h3 class="bz-card-title">COMBO Classic Chicken + Coca-Cola + Batatas Fritas</h3>
-              <span class="bz-card-desc">Frango empanado crocante: pão brioche, alface, tomate e maionese especial da casa. Acompanha Coca-Cola e fritas.</span>
+              <span class="bz-card-desc">Frango empanado crocante: pão brioche, alface, tomate e maionese especial da casa. Acompanha Coca-Cola e batatas fritas.</span>
               <span class="bz-card-old-price">De €14,90</span>
               <span class="bz-card-new-price">€5,90</span>
               <span class="bz-card-stock"><i class="fa fa-fire"></i> apenas 26 combos disponíveis</span>
@@ -588,7 +588,7 @@
             <div class="bz-card-text">
               <div class="bz-card-badges"><span class="bz-badge bz-badge-green"><i class="fa fa-truck" style="font-size:9px"></i> Entrega Grátis</span></div>
               <h3 class="bz-card-title">2X COMBO Classic Salada + 2X Coca-Cola + Batatas Fritas</h3>
-              <span class="bz-card-desc">2X Classic Salada: pão brioche, blend bovino 150g, cheddar, alface, tomate e molho especial. Com 2X Coca-Cola e fritas.</span>
+              <span class="bz-card-desc">2X Classic Salada: pão brioche, blend bovino 150g, cheddar, alface, tomate e molho especial. Com 2X Coca-Cola e batatas fritas.</span>
               <span class="bz-card-old-price">De €22,90</span>
               <span class="bz-card-new-price">€12,90</span>
               <span class="bz-card-stock"><i class="fa fa-fire"></i> apenas 26 combos disponíveis</span>
@@ -600,7 +600,7 @@
             <div class="bz-card-text">
               <div class="bz-card-badges"><span class="bz-badge bz-badge-green"><i class="fa fa-truck" style="font-size:9px"></i> Entrega Grátis</span></div>
               <h3 class="bz-card-title">Classic Smash Burguer + Coca-Cola + Batatas Fritas</h3>
-              <span class="bz-card-desc">Pão brioche, blend bovino 150g smashado na chapa, cheddar derretido, picles e molho especial da casa. Com Coca-Cola e fritas.</span>
+              <span class="bz-card-desc">Pão brioche, blend bovino 150g smashado na chapa, cheddar derretido, picles e molho especial da casa. Com Coca-Cola e batatas fritas.</span>
               <span class="bz-card-old-price">De €12,90</span>
               <span class="bz-card-new-price">€5,90</span>
               <span class="bz-card-stock"><i class="fa fa-fire"></i> apenas 26 combos disponíveis</span>
@@ -615,7 +615,7 @@
                 <span class="bz-badge bz-badge-red">ÚLTIMAS UNIDADES 🔥</span>
               </div>
               <h3 class="bz-card-title">COMBO Batatas Fritas + Frango Frito + Nuggets</h3>
-              <span class="bz-card-desc">350g de batatas fritas + 8 frangos fritos suculentos + 15 nuggets quentinhos. Acompanha 2X Coca-Cola.</span>
+              <span class="bz-card-desc">350g de batatas fritas + 8 frangos fritos suculentos + 15 nuggets acabados de fazer. Acompanha 2X Coca-Cola.</span>
               <span class="bz-card-old-price">De €24,90</span>
               <span class="bz-card-new-price">€13,90</span>
               <span class="bz-card-stock"><i class="fa fa-fire"></i> apenas 8 combos disponíveis</span>
@@ -728,7 +728,7 @@
               <span style="font-size:11px;font-weight:700;margin-right:3px">5,0</span>
               <span class="bz-stars" style="font-size:13px"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
             </div>
-            <p class="bz-review-text">Atendimento top, hambúrguer top, tudo top! 😍</p>
+            <p class="bz-review-text">Serviço impecável, hambúrguer top, tudo mesmo muito bom! 😍</p>
           </div>
           <div class="bz-review-img"><figure><img src="https://c.animaapp.com/mn82whciHgPeYs/assets/6.webp" alt="Avaliação" loading="lazy"></figure></div>
         </div>
@@ -805,6 +805,8 @@
 
   // ── LOCALIZAÇÃO ──
   function setCity(city){
+    var bannerEl = document.getElementById('banner-entrega');
+    if (bannerEl) bannerEl.style.display = '';
     document.getElementById('banner-city').textContent = city;
     document.getElementById('header-city').textContent = city;
     document.getElementById('header-location').style.display = 'flex';
@@ -876,7 +878,18 @@
       lookupPostalCode(cp),
       new Promise(function(r){ setTimeout(r, 3000); })
     ]);
-    var cityName = city || cp;
+    if (!city) {
+      await Swal.fire({
+        icon: 'error',
+        title: 'Código postal não encontrado',
+        text: 'Não encontrámos nenhuma localidade para esse código postal. Verifique e tente novamente.',
+        confirmButtonText: 'Tentar novamente',
+        confirmButtonColor: '#15803d',
+        allowOutsideClick: false
+      });
+      return showPostalModal();
+    }
+    var cityName = city;
 
     var res = await Swal.fire({
       icon: 'success',
@@ -884,7 +897,7 @@
       html:
         '<p style="font-size:15px;margin:8px 0">A loja mais próxima fica a <b>1,6 km</b> de si!<br>'+
         'O seu pedido chegará entre <b>25 a 45 minutos</b>.</p>'+
-        '<p style="font-size:13px;color:#6b7280;margin-top:10px">Código postal: <b>'+cp+'</b></p>',
+        '<p style="font-size:13px;color:#6b7280;margin-top:10px">Código postal: <b>'+cp+'</b> · <b>'+cityName+'</b></p>',
       confirmButtonText: 'Ver ementa de ofertas! 🍔',
       confirmButtonColor: '#15803d',
       showDenyButton: true,

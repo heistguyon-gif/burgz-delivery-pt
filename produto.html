@@ -61,7 +61,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: #15803d;
+      background: #000000;
       display: flex;
       align-items: center;
       padding: 0 16px;
@@ -584,8 +584,8 @@
       '</div>' +
 
       '<div class="bz-section-card">' +
-        '<label class="bz-obs-label" for="obs-input">Adicionar algum detalhe?</label>' +
-        '<textarea id="obs-input" class="bz-obs-input" rows="3" maxlength="140" placeholder="Escreva o detalhe aqui..." oninput="updateObsCount()"></textarea>' +
+        '<label class="bz-obs-label" for="obs-input">Quer adicionar algum detalhe?</label>' +
+        '<textarea id="obs-input" class="bz-obs-input" rows="3" maxlength="140" placeholder="Escreva aqui o seu detalhe..." oninput="updateObsCount()"></textarea>' +
         '<div class="bz-obs-count"><span id="obs-count">0</span>/140</div>' +
       '</div>';
 
@@ -621,9 +621,9 @@
     Swal.fire({
       title: 'Deseja que entreguemos agora?',
       showDenyButton: true,
-      confirmButtonText: 'Sim, por favor! 🚀',
+      confirmButtonText: 'Sim, entregar agora! 🚀',
       confirmButtonColor: '#15803d',
-      denyButtonText: 'Não, quero agendar a entrega',
+      denyButtonText: 'Não, quero agendar',
       denyButtonColor: '#6b7280',
       allowOutsideClick: false
     }).then(function(result){
@@ -644,14 +644,14 @@
     var minVal = now.toISOString().slice(0,16);
 
     Swal.fire({
-      title: '📅 Agendar entrega',
+      title: '📅 Agendar a entrega',
       html:
         '<p style="font-size:14px;color:#4b5563;margin-bottom:12px">Selecione a data e hora desejadas:</p>' +
         '<input type="datetime-local" id="swal-dt" class="swal2-input" min="'+minVal+'" style="font-size:15px">',
-      confirmButtonText: 'Confirmar agendamento',
+      confirmButtonText: 'Confirmar agendamento ✓',
       confirmButtonColor: '#15803d',
       showCancelButton: true,
-      cancelButtonText: 'Cancelar',
+      cancelButtonText: 'Voltar',
       cancelButtonColor: '#9ca3af',
       allowOutsideClick: false,
       didOpen: function(){
@@ -684,7 +684,7 @@
           icon: 'success',
           title: 'Entrega agendada!',
           html: '<p style="font-size:14px">O seu pedido será entregue a <b>'+formatted+'</b>.</p>',
-          confirmButtonText: 'Continuar para o pagamento',
+          confirmButtonText: 'Continuar para o pagamento →',
           confirmButtonColor: '#15803d'
         }).then(function(){
           trackAndRedirect();
