@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zé Delivery - Link Exclusivo</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+  <style>
+    #cart-bar {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 999;
+      background: #ffcc01; color: #1a1a1a; text-decoration: none;
+      height: 54px; max-height: 54px; overflow: hidden;
+      padding: 0 20px; box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      align-items: center; gap: 12px;
+      box-shadow: 0 -2px 10px rgba(0,0,0,.15);
+    }
+    #cart-bar-icon-wrap {
+      position: relative; flex-shrink: 0;
+      width: 22px; height: 22px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    #cart-bar-icon-wrap i { font-size: 17px; color: #1a1a1a; line-height: 1; }
+    #cart-bar-count {
+      position: absolute; top: -7px; left: -8px;
+      background: #1a1a1a; color: #ffcc01;
+      border-radius: 50%; width: 16px; height: 16px;
+      font-size: 10px; font-weight: 700; line-height: 16px;
+      text-align: center; display: block;
+    }
+    #cart-bar-label {
+      flex: 1; font-size: 14px; font-weight: 700;
+      text-align: center; color: #1a1a1a; line-height: 1;
+    }
+    #cart-bar-total {
+      font-size: 14px; font-weight: 700;
+      color: #1a1a1a; white-space: nowrap; line-height: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="ze-header">
+    <div class="ze-cover">
+      <div class="ze-logo">
+        <figure>
+          <img alt="Zé Delivery" src="images/ze-delivery-logo.jpg" title="Zé Delivery">
+        </figure>
+      </div>
+      <div class="ze-borda"></div>
+    </div>
+    <div class="ze-info">
+      <h1>
+        <img alt="Verificado" src="images/verified-badge.png" style="width:18px;height:18px;object-fit:contain;">
+        Zé Delivery
+      </h1>
+
+      <div class="ze-detail">
+        <div>
+          <span><i class="fa-solid fa-motorcycle" style="color:red"></i> <b>30-50</b> min</span> &bull; <span style="color:#077c22">Grátis</span>
+        </div>
+      </div>
+      <div class="ze-detail" style="gap:3px">
+        <i class="fa fa-map-marker-alt" style="color:red"></i>
+        <span class="local-cidade">Cidade</span> -
+        <span class="local-estado">UF</span> &bull; 5,6km de você
+      </div>
+      <div class="ze-detail">
+        <span style="display:flex;align-items:center;gap:4px"><i class="fa fa-star" style="color:#ffcc01"></i><b>4,8</b> (1226 avaliações)</span>
+      </div>
+      <div class="ze-alert-success">
+        <b>Entrega Grátis</b> para <b class="local-cidade">sua região</b>!
+      </div>
+      <div class="ze-aberto">
+        <i class="fa-solid fa-circle ze-btn-pisca" style="font-size:8px;margin-right:5px"></i>
+        <span id="status-loja">ABERTO</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main style="padding-bottom:0">
+
+    <!-- Combos Section -->
+    <div class="ze-container">
+      <div style="margin-bottom:20px">
+        <h2 class="ze-section-title">COMBOS ATÉ 70% OFF</h2>
+        <div class="ze-products-grid">
+
+          <!-- PRODUTO TESTE — remover após validação -->
+          <div class="ze-item">
+            <a class="ze-card-link" href="produto.html?id=99">
+              <div class="ze-card-text">
+                <h3 class="ze-card-title">🧪 Produto Teste</h3>
+                <span class="ze-card-desc">Produto de teste para validar pagamento.</span>
+                <span class="ze-price-line">de:</span>
+                <span class="ze-card-old-price">R$ 9,90</span>
+                <span class="ze-price-line">por:</span>
+                <span class="ze-card-new-price">R$ 5,00</span>
+              </div>
+              <div class="ze-card-img">
+                <figure><img alt="Produto Teste" height="110" loading="lazy" src="images/ze-delivery-logo.jpg" width="110"></figure>
+              </div>
+            </a>
+          </div>
+
+          <!-- Combo Red Label -->
+          <div class="ze-item">
+            <a class="ze-card-link" href="produto.html?id=1">
+              <div class="ze-card-text">
+                <h3 class="ze-card-title">Combo Red Label</h3>
+                <span class="ze-card-desc">1 garrafa de Johnnie Walker Red label 1L e 6 energéticos Red Bull!</span>
+                <span class="ze-price-line">de:</span>
+                <span class="ze-card-old-price">R$ 119,90</span>
+                <span class="ze-price-line">por:</span>
+                <span class="ze-card-new-price">R$ 48,90</span>
+              </div>
+              <div class="ze-card-img">
+                <figure><img alt="Combo Red Label" height="110" loading="lazy" src="images/img2.png" width="110"></figure>
+              </div>
+            </a>
+          </div>
+
+          <!-- Combo Jack Daniel's -->
+          <div class="ze-item">
+            <a class="ze-card-link" href="produto.html?id=2">
+              <div class="ze-card-text">
+                <h3 class="ze-card-title">Combo Jack Daniel's</h3>
+                <span class="ze-card-desc">1 garrafa de Jack Daniel's No.7 1L e 6 energéticos Red Bull!</span>
+                <span class="ze-price-line">de:</span>
+                <span class="ze-card-old-price">R$ 169,90</span>
+                <span class="ze-price-line">por:</span>
+                <span class="ze-card-new-price">R$ 58,90</span>
+              </div>
+              <div class="ze-card-img">
+                <figure><img alt="Combo Jack Daniel's" height="110" loading="lazy" src="images/img3.png" width="110"></figure>
+              </div>
+            </a>
+          </div>
+
+          <!-- Combo Buchanan's -->
+          <div class="ze-item">
+            <a class="ze-card-link" href="produto.html?id=3">
+              <div class="ze-card-text">
+                <h3 class="ze-card-title">Combo Buchanan's</h3>
+                <span class="ze-card-desc">1 garrafa de Buchanan's Deluxe 12 anos 1L e 6 energéticos Red Bull!</span>
+                <span class="ze-price-line">de:</span>
+                <span class="ze-card-old-price">R$ 224,90</span>
+                <span class="ze-price-line">por:</span>
+                <span class="ze-card-new-price">R$ 80,90</span>
+              </div>
+              <div class="ze-card-img">
+                <figure><img alt="Combo Buchanan's" height="110" loading="lazy" src="images/img4.png" width="110"></figure>
+              </div>
+            </a>
+          </div>
+
+          <!-- Combo Ballantine's -->
+          <div class="ze-item">
+            <a class="ze-card-link" href="produto.html?id=4">
+              <div class="ze-card-text">
+                <h3 class="ze-card-title">Combo Ballantine's</h3>
+                <span class="ze-card-desc">1 garrafa de Ballantine's 1L e 6 energéticos Red Bull!</span>
+                <span class="ze-price-line">de:</span>
+                <span class="ze-card-old-price">R$ 109,90</span>
+                <span class="ze-price-line">por:</span>
+                <span class="ze-card-new-price">R$ 40,90</span>
+              </div>
+              <div class="ze-card-img">
+                <figure><img alt="Combo Ballantine's" height="110" loading="lazy" src="images/img5.png" width="110"></figure>
+              </div>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Fardos Section -->
+    <div class="ze-container">
+      <div style="margin-bottom:20px">
+        <h2 class="ze-section-title">FARDOS ATÉ 70% OFF</h2>
+        <div class="ze-products-grid">
+
+          <!-- Fardo Budweiser Latão -->
+          <div class="ze-item">
+            <a class="ze-card-link" href="produto.html?id=5">
+              <div class="ze-card-text">
+                <h3 class="ze-card-title">Fardo Budweiser Latão</h3>
+                <span class="ze-card-desc">Fardo com 12 latas de Budweiser 473ml</span>
+                <span class="ze-price-line">de:</span>
+                <span class="ze-card-old-price">R$ 74,90</span>
+                <span class="ze-price-line">por:</span>
+                <span class="ze-card-new-price">R$ 20,90</span>
+              </div>
+              <div class="ze-card-img">
+                <figure><img alt="Fardo Budweiser Latão" height="110" loading="lazy" src="images/img8.png" width="110"></figure>
+              </div>
+            </a>
+          </div>
+
+          <!-- Fardo Heineken Latão -->
+          <div class="ze-item">
+            <a class="ze-card-link" href="produto.html?id=6">
+              <div class="ze-card-text">
+                <h3 class="ze-card-title">Fardo Heineken Latão</h3>
+                <span class="ze-card-desc">Fardo com 12 latas de Heineken 473ml</span>
+                <span class="ze-price-line">de:</span>
+                <span class="ze-card-old-price">R$ 81,90</span>
+                <span class="ze-price-line">por:</span>
+                <span class="ze-card-new-price">R$ 28,90</span>
+              </div>
+              <div class="ze-card-img">
+                <figure><img alt="Fardo Heineken Latão" height="110" loading="lazy" src="images/img10.png" width="110"></figure>
+              </div>
+            </a>
+          </div>
+
+          <!-- Fardo Corona Latão -->
+          <div class="ze-item">
+            <a class="ze-card-link" href="produto.html?id=7">
+              <div class="ze-card-text">
+                <h3 class="ze-card-title">Fardo Corona Latão</h3>
+                <span class="ze-card-desc">Fardo com 12 latas de Corona 473ml</span>
+                <span class="ze-price-line">de:</span>
+                <span class="ze-card-old-price">R$ 93,90</span>
+                <span class="ze-price-line">por:</span>
+                <span class="ze-card-new-price">R$ 33,90</span>
+              </div>
+              <div class="ze-card-img">
+                <figure><img alt="Fardo Corona Latão" height="110" loading="lazy" src="images/img11.png" width="110"></figure>
+              </div>
+            </a>
+          </div>
+
+          <!-- Fardo Brahma Latão -->
+          <div class="ze-item">
+            <a class="ze-card-link" href="produto.html?id=8">
+              <div class="ze-card-text">
+                <h3 class="ze-card-title">Fardo Brahma Latão</h3>
+                <span class="ze-card-desc">Fardo com 12 latas de Brahma 473ml</span>
+                <span class="ze-price-line">de:</span>
+                <span class="ze-card-old-price">R$ 64,90</span>
+                <span class="ze-price-line">por:</span>
+                <span class="ze-card-new-price">R$ 19,90</span>
+              </div>
+              <div class="ze-card-img">
+                <figure><img alt="Fardo Brahma Latão" height="110" loading="lazy" src="images/img9.png" width="110"></figure>
+              </div>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="ze-footer">
+      <div class="ze-footer-inner">
+        <div style="margin-bottom:30px">
+          <h3>CENTRAL DE ATENDIMENTO</h3>
+          <p>SAC (Serviço de Atendimento ao Consumidor)</p>
+          <p>E-mail: suporte@zedelivery24h.com.br</p>
+        </div>
+
+        <div style="margin-bottom:30px;border-top:1px solid #ddd;padding-top:20px">
+          <h3 style="margin-bottom:15px">INFORMAÇÕES</h3>
+          <div class="ze-footer-links">
+            <a href="#">Pesquisar</a>
+            <a href="#">Perguntas Frequentes</a>
+            <a href="#">Política de Privacidade</a>
+            <a href="#">Política de Reembolso</a>
+            <a href="#">Termos e Condições de Uso</a>
+          </div>
+        </div>
+
+        <div style="border-top:1px solid #ddd;padding-top:20px">
+          <p class="ze-footer-small">Zé Delivery &copy; - 91.152.566/0001-94 - 2026.</p>
+          <p class="ze-footer-small">Todos os direitos reservados.</p>
+
+          <div class="ze-footer-social">
+            <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="js/cidades_data.js"></script>
+  <script src="js/carrinho-data.js"></script>
+  <script src="js/script.js"></script>
+
+  <!-- Cart bar (shown when cart has items) -->
+  <a id="cart-bar" href="carrinho.html" style="display:none">
+    <div id="cart-bar-icon-wrap">
+      <i class="fa-solid fa-cart-shopping"></i>
+      <span id="cart-bar-count">0</span>
+    </div>
+    <span id="cart-bar-label">Ver carrinho</span>
+    <span id="cart-bar-total">R$ 0,00</span>
+  </a>
+  <script>
+    function updateCartBar() {
+      var n = CarrinhoData.totalItens();
+      var v = CarrinhoData.totalValor();
+      var bar = document.getElementById('cart-bar');
+      if (!bar) return;
+      if (n > 0) {
+        bar.style.display = 'flex';
+        document.getElementById('cart-bar-count').textContent = n;
+        document.getElementById('cart-bar-total').textContent = 'R$ ' + v.toFixed(2).replace('.', ',');
+      } else {
+        bar.style.display = 'none';
+      }
+    }
+    updateCartBar();
+    /* fires when user navigates back (bfcache restore on iOS/Safari) */
+    window.addEventListener('pageshow', updateCartBar);
+  </script>
+</body>
+</html>

@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finalizar Pedido - Zé Delivery</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f4f4f4;
+      color: #1a1a1a;
+      animation: slideInRight .28s cubic-bezier(.25,.46,.45,.94) both;
+    }
+    @keyframes slideInRight {
+      from { transform: translateX(100%); opacity: .6; }
+      to   { transform: translateX(0);    opacity: 1; }
+    }
+
+    /* ── Header ── */
+    .co-header {
+      position: sticky; top: 0; z-index: 100;
+      background: #ffcc01;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 16px;
+    }
+    .co-back {
+      background: none; border: none; cursor: pointer;
+      width: 38px; height: 38px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; color: #1a1a1a; transition: background .2s;
+    }
+    .co-back:hover { background: rgba(0,0,0,.1); }
+    .co-header-title { font-weight: 700; font-size: 16px; }
+
+    /* ── Content ── */
+    .co-content { padding: 14px 14px 100px; }
+
+    /* ── Card ── */
+    .co-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 20px 16px;
+      margin-bottom: 12px;
+      box-shadow: 0 1px 5px rgba(0,0,0,.07);
+    }
+
+    /* ── Section title ── */
+    .co-section-title {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 18px;
+    }
+    .co-section-icon {
+      width: 30px; height: 30px; border-radius: 50%;
+      background: #fff9cc; border: 1.5px solid #ffe066;
+      display: flex; align-items: center; justify-content: center;
+      color: #b8860b; font-size: 13px; flex-shrink: 0;
+    }
+    .co-section-label { font-size: 14px; font-weight: 600; color: #1a1a1a; }
+
+    /* ── Fields ── */
+    .co-field { margin-bottom: 16px; }
+    .co-field:last-of-type { margin-bottom: 0; }
+    .co-label {
+      display: block; font-size: 13px; font-weight: 500;
+      color: #444; margin-bottom: 7px;
+    }
+    .co-label .req { color: #e53935; }
+    .co-input, .co-select {
+      width: 100%; background: #fff;
+      border: 1.5px solid #e0e0e0; border-radius: 9px;
+      padding: 13px 14px;
+      font-family: 'Poppins', sans-serif; font-size: 15px; color: #1a1a1a;
+      outline: none; transition: border-color .2s;
+      -webkit-appearance: none; appearance: none;
+    }
+    .co-input:focus, .co-select:focus { border-color: #ffcc01; }
+    .co-input.is-error, .co-select.is-error { border-color: #e53935; }
+    .co-input::placeholder { color: #c0c0c0; }
+    .co-err-msg {
+      display: none; font-size: 11px; color: #e53935;
+      margin-top: 4px; padding-left: 2px;
+    }
+    .co-err-msg.visible { display: block; }
+
+    /* Select wrapper (arrow) */
+    .co-select-wrap { position: relative; }
+    .co-select-wrap::after {
+      content: '\f107'; font-family: 'Font Awesome 6 Free'; font-weight: 900;
+      position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+      color: #888; pointer-events: none; font-size: 14px;
+    }
+    .co-select { padding-right: 36px; cursor: pointer; background: #fff; }
+
+    /* ── Frete ── */
+    .co-frete-title {
+      font-size: 12px; font-weight: 600; color: #888;
+      text-transform: uppercase; letter-spacing: .4px;
+      margin: 18px 0 10px;
+    }
+    .co-frete-opt {
+      display: flex; align-items: center; gap: 12px;
+      border: 2px solid #ffcc01; border-radius: 10px;
+      padding: 13px 14px; background: #fffdf0;
+    }
+    .co-radio {
+      width: 20px; height: 20px; border-radius: 50%;
+      border: 2px solid #ffcc01; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .co-radio::after {
+      content: ''; width: 10px; height: 10px;
+      border-radius: 50%; background: #ffcc01;
+    }
+    .co-frete-info { flex: 1; }
+    .co-frete-name { font-size: 14px; font-weight: 600; }
+    .co-frete-sub  { font-size: 12px; color: #999; margin-top: 1px; }
+    .co-frete-price { font-size: 14px; font-weight: 700; color: #077c22; }
+
+    /* ── Summary ── */
+    .co-sum-row {
+      display: flex; justify-content: space-between;
+      font-size: 14px; color: #555; margin-bottom: 10px;
+    }
+    .co-sum-divider { border: none; border-top: 1px solid #eee; margin: 8px 0 12px; }
+    .co-sum-total {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 18px; font-weight: 700; margin-bottom: 18px;
+    }
+    .co-sum-total span:last-child { color: #ffcc01; }
+
+    /* ── PIX option ── */
+    .co-pix-opt {
+      display: flex; align-items: center; gap: 12px;
+      border: 2px solid #ffcc01; border-radius: 10px;
+      padding: 14px 16px; background: #fff;
+    }
+    .co-pix-icon {
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .co-pix-icon img { width: 32px; height: 32px; display: block; }
+    .co-pix-label { font-size: 15px; font-weight: 600; }
+
+    /* ── Bottom button ── */
+    .co-bottom {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: #fff; border-top: 1px solid #eee;
+      padding: 12px 16px; z-index: 200;
+    }
+    .co-btn-pagar {
+      width: 100%; background: #ffcc01; color: #1a1a1a; border: none;
+      border-radius: 24px; padding: 16px;
+      font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 16px;
+      letter-spacing: .5px; cursor: pointer; transition: background .2s, opacity .2s;
+    }
+    .co-btn-pagar:hover  { background: #f0c000; }
+    .co-btn-pagar:disabled { opacity: .5; cursor: default; }
+  </style>
+</head>
+<body>
+
+  <div class="co-header">
+    <button class="co-back" onclick="history.back()"><i class="fa fa-chevron-left"></i></button>
+    <span class="co-header-title">Finalizar Pedido</span>
+    <div style="width:38px"></div>
+  </div>
+
+  <div class="co-content">
+
+    <!-- ── Informações de Contato ── -->
+    <div class="co-card">
+      <div class="co-section-title">
+        <div class="co-section-icon"><i class="fa fa-user"></i></div>
+        <span class="co-section-label">Informações de Contato</span>
+      </div>
+
+      <div class="co-field">
+        <label class="co-label" for="co-nome">Nome completo<span class="req">*</span></label>
+        <input id="co-nome" class="co-input" type="text" placeholder="Digite seu nome completo" autocomplete="name">
+        <span id="err-nome" class="co-err-msg"></span>
+      </div>
+
+      <div class="co-field">
+        <label class="co-label" for="co-email">E-mail<span class="req">*</span></label>
+        <input id="co-email" class="co-input" type="email" placeholder="Digite seu e-mail" autocomplete="email">
+        <span id="err-email" class="co-err-msg"></span>
+      </div>
+
+      <div class="co-field">
+        <label class="co-label" for="co-tel">Telefone<span class="req">*</span></label>
+        <input id="co-tel" class="co-input" type="tel" placeholder="Digite o seu número de telefone" maxlength="15" autocomplete="tel" inputmode="tel">
+        <span id="err-tel" class="co-err-msg"></span>
+      </div>
+
+      <div class="co-field">
+        <label class="co-label" for="co-cpf">CPF/CNPJ<span class="req">*</span></label>
+        <input id="co-cpf" class="co-input" type="text" placeholder="Digite seu CPF ou CNPJ" maxlength="14" inputmode="numeric">
+        <span id="err-cpf" class="co-err-msg"></span>
+      </div>
+    </div>
+
+    <!-- ── Informações de Entrega ── -->
+    <div class="co-card">
+      <div class="co-section-title">
+        <div class="co-section-icon"><i class="fa fa-map-marker-alt"></i></div>
+        <span class="co-section-label">Informações de Entrega</span>
+      </div>
+
+      <div class="co-field">
+        <label class="co-label" for="co-cep">CEP<span class="req">*</span></label>
+        <input id="co-cep" class="co-input" type="text" placeholder="Digite seu CEP" maxlength="9" inputmode="numeric">
+        <span id="err-cep" class="co-err-msg"></span>
+      </div>
+
+      <div id="co-endereco-extra" style="display:none">
+
+        <div class="co-field">
+          <label class="co-label" for="co-rua">Endereço<span class="req">*</span></label>
+          <input id="co-rua" class="co-input" type="text" placeholder="Endereço" autocomplete="street-address">
+          <span id="err-rua" class="co-err-msg"></span>
+        </div>
+
+        <div class="co-field">
+          <label class="co-label" for="co-numero">Número</label>
+          <input id="co-numero" class="co-input" type="text" placeholder="Digite o número" inputmode="numeric">
+          <span id="err-numero" class="co-err-msg"></span>
+        </div>
+
+        <div class="co-field">
+          <label class="co-label" for="co-compl">Complemento</label>
+          <input id="co-compl" class="co-input" type="text" placeholder="Apartamento, unidade, prédio, andar, etc.">
+        </div>
+
+        <div class="co-field">
+          <label class="co-label" for="co-bairro">Bairro<span class="req">*</span></label>
+          <input id="co-bairro" class="co-input" type="text" placeholder="Bairro">
+          <span id="err-bairro" class="co-err-msg"></span>
+        </div>
+
+        <div class="co-field">
+          <label class="co-label" for="co-cidade">Cidade<span class="req">*</span></label>
+          <input id="co-cidade" class="co-input" type="text" placeholder="Cidade">
+          <span id="err-cidade" class="co-err-msg"></span>
+        </div>
+
+        <div class="co-field">
+          <label class="co-label" for="co-estado">Estado<span class="req">*</span></label>
+          <div class="co-select-wrap">
+            <select id="co-estado" class="co-select">
+              <option value="">Selecione o estado...</option>
+              <option value="AC">Acre</option>
+              <option value="AL">Alagoas</option>
+              <option value="AP">Amapá</option>
+              <option value="AM">Amazonas</option>
+              <option value="BA">Bahia</option>
+              <option value="CE">Ceará</option>
+              <option value="DF">Distrito Federal</option>
+              <option value="ES">Espírito Santo</option>
+              <option value="GO">Goiás</option>
+              <option value="MA">Maranhão</option>
+              <option value="MT">Mato Grosso</option>
+              <option value="MS">Mato Grosso do Sul</option>
+              <option value="MG">Minas Gerais</option>
+              <option value="PA">Pará</option>
+              <option value="PB">Paraíba</option>
+              <option value="PR">Paraná</option>
+              <option value="PE">Pernambuco</option>
+              <option value="PI">Piauí</option>
+              <option value="RJ">Rio de Janeiro</option>
+              <option value="RN">Rio Grande do Norte</option>
+              <option value="RS">Rio Grande do Sul</option>
+              <option value="RO">Rondônia</option>
+              <option value="RR">Roraima</option>
+              <option value="SC">Santa Catarina</option>
+              <option value="SP">São Paulo</option>
+              <option value="SE">Sergipe</option>
+              <option value="TO">Tocantins</option>
+            </select>
+          </div>
+          <span id="err-estado" class="co-err-msg"></span>
+        </div>
+
+        <div class="co-frete-title">Escolha o melhor frete para você</div>
+        <div class="co-frete-opt">
+          <div class="co-radio"></div>
+          <div class="co-frete-info">
+            <div class="co-frete-name">Zé Delivery</div>
+            <div class="co-frete-sub">de 30 a 40 minutos</div>
+          </div>
+          <div class="co-frete-price">R$ 0,00</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── Resumo do Pedido ── -->
+    <div class="co-card">
+      <div class="co-section-title">
+        <div class="co-section-icon"><i class="fa fa-credit-card"></i></div>
+        <span class="co-section-label">Resumo do Pedido</span>
+      </div>
+
+      <div class="co-sum-row">
+        <span>Subtotal:</span>
+        <span id="co-subtotal">R$ 0,00</span>
+      </div>
+      <div class="co-sum-row">
+        <span>Frete:</span>
+        <span style="color:#077c22;font-weight:600">R$ 0,00</span>
+      </div>
+      <hr class="co-sum-divider">
+      <div class="co-sum-total">
+        <span>Total</span>
+        <span id="co-total-val">R$ 0,00</span>
+      </div>
+
+      <div class="co-pix-opt">
+        <div class="co-radio"></div>
+        <div class="co-pix-icon">
+          <img src="images/pix-logo.png" alt="PIX">
+        </div>
+        <span class="co-pix-label">PIX</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="co-bottom">
+    <button class="co-btn-pagar" id="co-btn" onclick="pagar()">PAGAR</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="js/carrinho-data.js"></script>
+  <script>
+
+    function fmt(v) { return 'R$ ' + v.toFixed(2).replace('.', ','); }
+
+    /* ── Init ── */
+    (function() {
+      if (CarrinhoData.totalItens() === 0) { location.href = 'index.html'; return; }
+      var t = CarrinhoData.totalValor();
+      document.getElementById('co-subtotal').textContent  = fmt(t);
+      document.getElementById('co-total-val').textContent = fmt(t);
+    })();
+
+    /* ── Masks ── */
+    document.getElementById('co-cpf').addEventListener('input', function() {
+      var v = this.value.replace(/\D/g,'').slice(0,11);
+      if      (v.length > 9) v = v.slice(0,3)+'.'+v.slice(3,6)+'.'+v.slice(6,9)+'-'+v.slice(9);
+      else if (v.length > 6) v = v.slice(0,3)+'.'+v.slice(3,6)+'.'+v.slice(6);
+      else if (v.length > 3) v = v.slice(0,3)+'.'+v.slice(3);
+      this.value = v;
+      clearErr(this);
+    });
+
+    document.getElementById('co-tel').addEventListener('input', function() {
+      var v = this.value.replace(/\D/g,'').slice(0,11);
+      if      (v.length > 10) v = '('+v.slice(0,2)+') '+v.slice(2,7)+'-'+v.slice(7);
+      else if (v.length > 6)  v = '('+v.slice(0,2)+') '+v.slice(2,6)+'-'+v.slice(6);
+      else if (v.length > 2)  v = '('+v.slice(0,2)+') '+v.slice(2);
+      this.value = v;
+      clearErr(this);
+    });
+
+    document.getElementById('co-cep').addEventListener('input', function() {
+      var v = this.value.replace(/\D/g,'').slice(0,8);
+      if (v.length > 5) v = v.slice(0,5)+'-'+v.slice(5);
+      this.value = v;
+      clearErr(this);
+      if (v.replace('-','').length === 8) {
+        fetch('https://viacep.com.br/ws/'+v.replace('-','')+'/json/')
+          .then(function(r){ return r.json(); })
+          .then(function(d){
+            if (!d.erro) {
+              set('co-rua',    d.logradouro || '');
+              set('co-bairro', d.bairro     || '');
+              set('co-cidade', d.localidade || '');
+              /* set estado select */
+              var sel = document.getElementById('co-estado');
+              for (var i = 0; i < sel.options.length; i++) {
+                if (sel.options[i].value === (d.uf || '')) { sel.selectedIndex = i; break; }
+              }
+              /* revela os campos de endereço */
+              document.getElementById('co-endereco-extra').style.display = 'block';
+              document.getElementById('co-numero').focus();
+            }
+          }).catch(function(){});
+      }
+    });
+
+    /* clear error on focus */
+    ['co-nome','co-email','co-tel','co-cpf','co-cep','co-rua','co-numero','co-bairro','co-cidade','co-estado'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.addEventListener('focus', function(){ clearErr(this); });
+    });
+
+    function set(id, val) {
+      var el = document.getElementById(id);
+      if (el) { el.value = val; clearErr(el); }
+    }
+
+    function showErr(id, msg) {
+      var inp = document.getElementById(id);
+      var err = document.getElementById('err-'+id.replace('co-',''));
+      if (inp) inp.classList.add('is-error');
+      if (err) { err.textContent = msg; err.classList.add('visible'); }
+      if (inp) { inp.scrollIntoView({ behavior: 'smooth', block: 'center' }); inp.focus(); }
+    }
+
+    function clearErr(el) {
+      if (!el) return;
+      el.classList.remove('is-error');
+      var id = el.id.replace('co-','');
+      var err = document.getElementById('err-'+id);
+      if (err) err.classList.remove('visible');
+    }
+
+    /* ── Validation & Pay ── */
+    async function pagar() {
+      var nome   = document.getElementById('co-nome').value.trim();
+      var email  = document.getElementById('co-email').value.trim();
+      var tel    = document.getElementById('co-tel').value.replace(/\D/g,'');
+      var cpf    = document.getElementById('co-cpf').value.replace(/\D/g,'');
+      var cep    = document.getElementById('co-cep').value.trim();
+      var rua    = document.getElementById('co-rua').value.trim();
+      var numero = document.getElementById('co-numero').value.trim();
+      var bairro = document.getElementById('co-bairro').value.trim();
+      var cidade = document.getElementById('co-cidade').value.trim();
+      var estado = document.getElementById('co-estado').value;
+
+      /* clear all errors first */
+      ['co-nome','co-email','co-tel','co-cpf','co-cep','co-rua','co-numero','co-bairro','co-cidade','co-estado'].forEach(function(id){
+        clearErr(document.getElementById(id));
+      });
+
+      var ok = true;
+      function fail(id, msg) { if (ok) { showErr(id, msg); ok = false; } }
+
+      if (!nome || nome.split(/\s+/).length < 2)               fail('co-nome',   'Informe seu nome e sobrenome.');
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) fail('co-email',  'E-mail inválido.');
+      if (tel.length < 10 || tel.length > 11)                  fail('co-tel',    'Informe DDD + número (ex: 11999999999).');
+      if (cpf.length !== 11)                                    fail('co-cpf',    'CPF inválido — informe os 11 dígitos.');
+      if (!cep || cep.replace('-','').length !== 8)             fail('co-cep',    'CEP inválido.');
+      if (!rua)                                                 fail('co-rua',    'Informe a rua/avenida.');
+      if (!bairro)                                              fail('co-bairro', 'Informe o bairro.');
+      if (!cidade)                                              fail('co-cidade', 'Informe a cidade.');
+      if (!estado)                                              fail('co-estado', 'Selecione o estado.');
+      if (!ok) return;
+
+      var btn = document.getElementById('co-btn');
+      btn.disabled = true;
+      btn.textContent = 'Processando...';
+
+      var total = CarrinhoData.totalValor();
+      var transacao;
+      try {
+        var response = await fetch('api/criar-pix.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            produto: 'Pedido finalizado',
+            valor:   Math.max(0.01, total - 0.99),
+            nome:    nome,
+            cpf:     cpf,
+            tel:     tel,
+            email:   email
+          })
+        });
+        transacao = await response.json();
+        if (!response.ok) throw new Error(JSON.stringify(transacao));
+      } catch (err) {
+        btn.disabled = false;
+        btn.textContent = 'PAGAR';
+        var msg = err.message || 'Erro desconhecido';
+        if (err instanceof TypeError && location.protocol === 'file:') {
+          msg = 'Servidor não encontrado. Abra via http://localhost:3000.';
+        }
+        Swal.fire({
+          icon: 'error', title: 'Erro ao gerar PIX',
+          html: '<p style="font-size:13px;color:#555;word-break:break-word;background:#f8f8f8;padding:10px;border-radius:6px;text-align:left;max-height:100px;overflow:auto">' + msg + '</p>',
+          confirmButtonColor: '#FFCC00', confirmButtonText: 'OK',
+          didOpen: function() { var b = document.querySelector('.swal2-confirm'); if(b) b.style.color='#1a1a1a'; }
+        });
+        return;
+      }
+
+      btn.disabled = false;
+      btn.textContent = 'PAGAR';
+
+      var pixCode = (transacao.pix && transacao.pix.payload) ? transacao.pix.payload : '';
+      var txId    = transacao.id || '';
+      var pixImg  = pixCode ? 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+encodeURIComponent(pixCode) : '';
+      mostrarPixModal(total, pixCode, pixImg, txId);
+    }
+
+    /* ── PIX → redireciona para pix.html ── */
+    function mostrarPixModal(total, pixCode, pixImg, txId) {
+      localStorage.setItem('ze_pix_pendente', JSON.stringify({
+        pixCode:   pixCode,
+        pixImg:    pixImg,
+        txId:      txId,
+        total:     total,
+        createdAt: Date.now()
+      }));
+      window.location.href = 'pix.html';
+    }
+  </script>
+</body>
+</html>

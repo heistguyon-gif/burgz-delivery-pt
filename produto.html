@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produto - Zé Delivery</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: #fff; color: #1A1A1A;
+           animation: slideInRight .28s cubic-bezier(.25,.46,.45,.94) both; }
+
+    @keyframes slideInRight {
+      from { transform: translateX(100%); opacity: .6; }
+      to   { transform: translateX(0);    opacity: 1; }
+    }
+
+    /* ── Header ── */
+    .p-header {
+      position: sticky; top: 0; z-index: 100;
+      background: #ffcc01;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 16px;
+    }
+    .p-header-btn {
+      background: none; border: none; cursor: pointer;
+      width: 38px; height: 38px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; color: #1A1A1A; transition: background .2s;
+    }
+    .p-header-btn:hover { background: rgba(0,0,0,.1); }
+    .p-header-title { font-weight: 700; font-size: 16px; }
+    .p-cart-wrap { position: relative; }
+    .p-cart-badge {
+      position: absolute; top: -4px; right: -4px;
+      background: #1A1A1A; color: #ffcc01;
+      border-radius: 50%; width: 18px; height: 18px;
+      font-size: 10px; font-weight: 700;
+      display: none; align-items: center; justify-content: center;
+    }
+
+    /* ── Imagem ── */
+    .p-img-wrap {
+      width: 100%; height: 280px; background: #ffcc01;
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    .p-img { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; padding: 20px; }
+
+    /* ── Corpo ── */
+    .p-body { padding: 18px 16px 110px; }
+    .p-nome { font-size: 20px; font-weight: 700; line-height: 1.3; margin-bottom: 8px; }
+    .p-desc { font-size: 14px; color: #777; line-height: 1.55; margin-bottom: 16px; }
+    .p-preco-box { border-bottom: 1px solid #eee; padding-bottom: 16px; margin-bottom: 18px; }
+    .p-preco-antigo { font-size: 13px; color: #bbb; text-decoration: line-through; }
+    .p-preco-novo { font-size: 26px; font-weight: 700; color: #077c22; }
+    .p-obs-label { display: block; font-size: 13px; font-weight: 600; color: #555; margin-bottom: 8px; }
+    .p-obs {
+      width: 100%; border: 1.5px solid #ddd; border-radius: 10px;
+      padding: 10px 12px; font-family: 'Poppins', sans-serif;
+      font-size: 13px; color: #555; resize: none; outline: none;
+      transition: border-color .2s;
+    }
+    .p-obs:focus { border-color: #ffcc01; }
+    .v-btn {
+      background: #fff; border: 1.5px solid #ddd; border-radius: 20px;
+      padding: 8px 16px; font-family: 'Poppins', sans-serif;
+      font-size: 13px; font-weight: 600; cursor: pointer; transition: all .15s;
+    }
+    .v-btn:hover { border-color: #ffcc01; }
+    .v-btn.active { background: #ffcc01; border-color: #ffcc01; color: #1a1a1a; }
+
+    /* ── Barra inferior fixa ── */
+    .p-bottom {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: #fff; border-top: 1px solid #eee;
+      padding: 12px 16px; display: flex; align-items: center; gap: 12px;
+      z-index: 200;
+    }
+    .p-qty {
+      display: flex; align-items: center; gap: 10px;
+      background: #f5f5f5; border-radius: 24px; padding: 7px 14px;
+      flex-shrink: 0;
+    }
+    .p-qty-btn {
+      background: none; border: none; cursor: pointer;
+      font-size: 20px; font-weight: 700; color: #1A1A1A;
+      width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
+      border-radius: 50%; transition: background .15s;
+    }
+    .p-qty-btn:hover:not(:disabled) { background: #e0e0e0; }
+    .p-qty-btn:disabled { opacity: .35; cursor: default; }
+    .p-qty-num { font-size: 16px; font-weight: 700; min-width: 22px; text-align: center; }
+    .p-add-btn {
+      flex: 1; background: #ffcc01; color: #1A1A1A; border: none;
+      border-radius: 24px; padding: 13px 18px;
+      font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 15px;
+      cursor: pointer; display: flex; align-items: center; justify-content: space-between;
+      transition: background .2s;
+    }
+    .p-add-btn:hover { background: #f0c000; }
+    .p-add-btn.success { background: #077c22; color: #fff; justify-content: center; gap: 8px; }
+  </style>
+</head>
+<body>
+
+  <div class="p-header">
+    <button class="p-header-btn" onclick="goBack()"><i class="fa fa-chevron-left"></i></button>
+    <span class="p-header-title">Zé Delivery</span>
+    <button class="p-header-btn p-cart-wrap" onclick="window.location.href='carrinho.html'">
+      <i class="fa fa-shopping-cart"></i>
+      <span id="badge" class="p-cart-badge">0</span>
+    </button>
+  </div>
+
+  <div class="p-img-wrap">
+    <img id="p-img" class="p-img" src="" alt="">
+  </div>
+
+  <div class="p-body">
+    <h1 id="p-nome" class="p-nome"></h1>
+    <p  id="p-desc" class="p-desc"></p>
+    <div class="p-preco-box">
+      <div id="p-antigo" class="p-preco-antigo"></div>
+      <div id="p-novo"   class="p-preco-novo"></div>
+    </div>
+    <!-- Variações de ticket (só aparece no produto id=8) -->
+    <div id="ticket-variants" style="display:none;margin-bottom:18px">
+      <div style="font-size:13px;font-weight:600;color:#555;margin-bottom:10px">Selecione o valor:</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button onclick="setVariant(5.90,this)"   class="v-btn">R$ 5,90</button>
+        <button onclick="setVariant(10.90,this)"  class="v-btn">R$ 10,90</button>
+        <button onclick="setVariant(34.90,this)"  class="v-btn">R$ 34,90</button>
+        <button onclick="setVariant(133.49,this)" class="v-btn">R$ 133,49</button>
+      </div>
+    </div>
+
+    <label class="p-obs-label">Observação (opcional)</label>
+    <textarea id="p-obs" class="p-obs" rows="3" placeholder="Alguma observação para este item?"></textarea>
+  </div>
+
+  <div class="p-bottom">
+    <div class="p-qty">
+      <button class="p-qty-btn" id="btn-m" onclick="changeQty(-1)" disabled>−</button>
+      <span class="p-qty-num" id="qty">1</span>
+      <button class="p-qty-btn" id="btn-p" onclick="changeQty(1)">+</button>
+    </div>
+    <button class="p-add-btn" id="btn-add" onclick="addToCart()">
+      <span>Adicionar.</span>
+      <span id="btn-price">R$ 0,00</span>
+    </button>
+  </div>
+
+  <script src="js/produtos.js"></script>
+  <script src="js/carrinho-data.js"></script>
+  <script>
+    var prod = null, qty = 1;
+
+    function fmt(v) { return 'R$ ' + v.toFixed(2).replace('.', ','); }
+
+    function goBack() {
+      if (document.referrer && document.referrer.includes(location.hostname)) history.back();
+      else window.location.href = 'index.html';
+    }
+
+    function updatePrice() {
+      document.getElementById('btn-price').textContent = fmt(prod.preco * qty);
+      document.getElementById('p-novo').textContent = fmt(prod.preco);
+    }
+
+    function setVariant(valor, btn) {
+      prod.preco = valor;
+      updatePrice();
+      document.querySelectorAll('.v-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+    }
+
+    function changeQty(d) {
+      qty = Math.max(1, Math.min(99, qty + d));
+      document.getElementById('qty').textContent = qty;
+      document.getElementById('btn-m').disabled = qty <= 1;
+      updatePrice();
+    }
+
+    function addToCart() {
+      if (!prod) return;
+      var obs = document.getElementById('p-obs').value.trim();
+      CarrinhoData.adicionar(prod, qty, obs);
+
+      var btn = document.getElementById('btn-add');
+      btn.classList.add('success');
+      btn.innerHTML = '<i class="fa fa-check"></i><span>Adicionado!</span>';
+      setTimeout(function() { window.location.href = 'index.html'; }, 700);
+    }
+
+    (function init() {
+      var id = parseInt(new URLSearchParams(location.search).get('id'));
+      prod = PRODUTOS.find(function(p) { return p.id === id; });
+      if (!prod) { location.href = 'index.html'; return; }
+
+      document.title = prod.nome + ' - Zé Delivery';
+      document.getElementById('p-img').src   = prod.img;
+      document.getElementById('p-img').alt   = prod.nome;
+      document.getElementById('p-nome').textContent = prod.nome;
+      document.getElementById('p-desc').textContent = prod.desc;
+      document.getElementById('p-antigo').textContent = 'De: ' + fmt(prod.precoAntigo);
+      document.getElementById('p-novo').textContent   = fmt(prod.preco);
+      updatePrice();
+
+      var n = CarrinhoData.totalItens();
+      var b = document.getElementById('badge');
+      if (n > 0) { b.style.display = 'flex'; b.textContent = n; }
+
+      /* exibe variações de ticket só no produto 8 */
+      if (prod.id === 8) {
+        document.getElementById('ticket-variants').style.display = 'block';
+        /* seleciona o primeiro por padrão */
+        var firstBtn = document.querySelector('.v-btn');
+        if (firstBtn) setVariant(5.90, firstBtn);
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagar com PIX - Zé Delivery</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f4f4f4;
+      color: #1a1a1a;
+      animation: slideInRight .28s cubic-bezier(.25,.46,.45,.94) both;
+      padding-bottom: 30px;
+    }
+    @keyframes slideInRight {
+      from { transform: translateX(100%); opacity: .6; }
+      to   { transform: translateX(0);    opacity: 1; }
+    }
+
+    /* ── Header ── */
+    .px-header {
+      position: sticky; top: 0; z-index: 100;
+      background: #ffcc01;
+      display: flex; align-items: center;
+      padding: 14px 16px; gap: 12px;
+    }
+    .px-back {
+      background: none; border: none; cursor: pointer;
+      width: 38px; height: 38px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; color: #1a1a1a; transition: background .2s; flex-shrink: 0;
+    }
+    .px-back:hover { background: rgba(0,0,0,.1); }
+    .px-header-title { font-weight: 700; font-size: 16px; }
+
+    /* ── Content ── */
+    .px-content { padding: 14px 14px; }
+
+    /* ── Card ── */
+    .px-card {
+      background: #fff; border-radius: 14px;
+      padding: 20px 16px; margin-bottom: 12px;
+      box-shadow: 0 1px 5px rgba(0,0,0,.07);
+    }
+
+    /* ── Countdown ── */
+    .px-timer-label {
+      text-align: center; font-size: 12px; color: #999;
+      margin-bottom: 10px; font-weight: 500;
+    }
+    .px-timer {
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      margin-bottom: 18px;
+    }
+    .px-timer-box {
+      background: #ffcc01; border-radius: 8px;
+      width: 46px; height: 46px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; font-weight: 700; color: #1a1a1a;
+    }
+    .px-timer-sep {
+      font-size: 22px; font-weight: 700; color: #ccc; line-height: 1;
+    }
+
+    /* ── Valor + produto ── */
+    .px-val-row {
+      display: flex; align-items: center; justify-content: space-between;
+      background: #f9f9f9; border-radius: 10px; padding: 12px 14px;
+      margin-bottom: 18px;
+    }
+    .px-val-amount { font-size: 20px; font-weight: 700; color: #077c22; }
+    .px-val-produto { font-size: 12px; color: #999; font-weight: 500; text-align: right; }
+    .px-val-produto strong { display: block; font-size: 13px; color: #555; }
+
+    /* ── QR Code ── */
+    .px-qr-wrap {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      margin-bottom: 18px;
+    }
+    .px-qr-img {
+      width: 200px; height: 200px; border-radius: 12px;
+      border: 2px solid #eee; display: block; object-fit: contain;
+    }
+    .px-qr-hint {
+      font-size: 12px; color: #aaa; display: flex; align-items: center; gap: 5px;
+    }
+
+    /* ── Badges ── */
+    .px-badges {
+      display: flex; gap: 6px; justify-content: center; margin-top: 16px;
+      flex-wrap: nowrap;
+    }
+    .px-badge {
+      display: flex; align-items: center; gap: 4px;
+      background: #f5f5f5; border-radius: 20px; padding: 6px 8px;
+      font-size: 10px; font-weight: 600; color: #555; white-space: nowrap;
+    }
+    .px-badge i { font-size: 11px; }
+
+    /* ── PIX Code ── */
+    .px-code-label {
+      font-size: 12px; font-weight: 600; color: #888;
+      text-transform: uppercase; letter-spacing: .4px;
+      margin-bottom: 8px;
+    }
+    .px-code-box {
+      background: #f5f5f5; border: 1.5px dashed #ddd; border-radius: 10px;
+      padding: 12px 14px; margin-bottom: 6px;
+      font-family: monospace; font-size: 11px; color: #444;
+      word-break: break-all; line-height: 1.6;
+      cursor: pointer; transition: background .2s; position: relative;
+    }
+    .px-code-box:hover { background: #efefef; }
+    .px-code-box:active { background: #e8e8e8; }
+    .px-code-hint {
+      font-size: 11px; color: #bbb; text-align: center; margin-bottom: 14px;
+      display: flex; align-items: center; justify-content: center; gap: 4px;
+    }
+
+    /* ── Copiar btn ── */
+    .px-copy-btn {
+      width: 100%; background: #ffcc01; color: #1a1a1a; border: none;
+      border-radius: 24px; padding: 15px;
+      font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 15px;
+      cursor: pointer; transition: background .2s, color .2s;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .px-copy-btn:hover { background: #f0c000; }
+    .px-copy-btn.copied { background: #077c22; color: #fff; }
+
+    /* ── Status ── */
+    .px-status {
+      display: flex; align-items: center; gap: 10px;
+      background: #fffdf0; border: 1.5px solid #ffe066; border-radius: 10px;
+      padding: 12px 14px; margin-bottom: 12px;
+    }
+    .px-status-icon { font-size: 20px; flex-shrink: 0; }
+    .px-status-text { font-size: 13px; font-weight: 600; color: #7a6000; }
+    .px-status-sub  { font-size: 12px; color: #aaa; margin-top: 2px; }
+
+    /* ── Instructions ── */
+    .px-instr-title {
+      font-size: 14px; font-weight: 700; margin-bottom: 16px; color: #1a1a1a;
+    }
+    .px-step {
+      display: flex; gap: 14px; margin-bottom: 16px; align-items: flex-start;
+    }
+    .px-step:last-child { margin-bottom: 0; }
+    .px-step-num {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: #ffcc01; color: #1a1a1a;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700; flex-shrink: 0; margin-top: 1px;
+    }
+    .px-step-title { font-size: 14px; font-weight: 600; line-height: 1.3; margin-bottom: 2px; }
+    .px-step-sub   { font-size: 12px; color: #999; line-height: 1.4; }
+  </style>
+</head>
+<body>
+
+  <div class="px-header">
+    <button class="px-back" onclick="history.back()"><i class="fa fa-chevron-left"></i></button>
+    <span class="px-header-title">Pagar com PIX</span>
+  </div>
+
+  <div class="px-content">
+
+    <!-- ── Cartão principal ── -->
+    <div class="px-card">
+
+      <!-- Countdown -->
+      <div class="px-timer-label">PIX expira em</div>
+      <div class="px-timer">
+        <div class="px-timer-box" id="t-min">10</div>
+        <div class="px-timer-sep">:</div>
+        <div class="px-timer-box" id="t-sec">00</div>
+      </div>
+
+      <!-- Valor + produto -->
+      <div class="px-val-row">
+        <div class="px-val-amount" id="px-valor">R$ 0,00</div>
+        <div class="px-val-produto">
+          <span>Pedido</span>
+          <strong>Zé Delivery</strong>
+        </div>
+      </div>
+
+      <!-- QR Code -->
+      <div class="px-qr-wrap">
+        <img id="px-qr" class="px-qr-img" src="" alt="QR Code PIX">
+        <div class="px-qr-hint"><i class="fa fa-camera" style="color:#ccc"></i> Aponte a câmera do celular para o QR Code</div>
+      </div>
+
+      <!-- Código PIX -->
+      <div class="px-code-label">Código PIX copia e cola</div>
+      <div class="px-code-box" id="px-code-box" onclick="copiarCodigo()">...</div>
+      <div class="px-code-hint"><i class="fa fa-hand-pointer" style="color:#ccc"></i> Clique no código para copiar</div>
+
+      <!-- Botão copiar -->
+      <button class="px-copy-btn" id="px-copy-btn" onclick="copiarCodigo()">
+        <i class="fa fa-copy"></i> Copiar código Pix
+      </button>
+
+      <!-- Badges de segurança -->
+      <div class="px-badges">
+        <div class="px-badge"><i class="fa fa-shield-halved" style="color:#077c22"></i> Protegido pelo Pix</div>
+        <div class="px-badge"><i class="fa fa-bolt" style="color:#b8860b"></i> Liberação em até 2 min</div>
+        <div class="px-badge"><i class="fa fa-lock" style="color:#1a7a8a"></i> Ambiente seguro</div>
+      </div>
+
+    </div>
+
+    <!-- ── Status ── -->
+    <div class="px-status" id="px-status-card">
+      <div class="px-status-icon" id="px-status-icon">⏳</div>
+      <div>
+        <div class="px-status-text" id="px-status-text">Aguardando pagamento...</div>
+        <div class="px-status-sub" id="px-status-sub">Verificando automaticamente</div>
+      </div>
+    </div>
+
+    <!-- ── Como pagar ── -->
+    <div class="px-card">
+      <div class="px-instr-title">Como realizar o pagamento</div>
+
+      <div class="px-step">
+        <div class="px-step-num">1</div>
+        <div>
+          <div class="px-step-title">Copie o código do Pix</div>
+          <div class="px-step-sub">Clique no código ou no botão para copiar</div>
+        </div>
+      </div>
+
+      <div class="px-step">
+        <div class="px-step-num">2</div>
+        <div>
+          <div class="px-step-title">Abra o app do banco</div>
+          <div class="px-step-sub">Entre na opção pix e escolha "Pix Copia e Cola"</div>
+        </div>
+      </div>
+
+      <div class="px-step">
+        <div class="px-step-num">3</div>
+        <div>
+          <div class="px-step-title">Cole o código e realize o pagamento</div>
+          <div class="px-step-sub">Verifique o valor antes de finalizar</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="js/carrinho-data.js"></script>
+  <script>
+    var pixData = null;
+    var checkInterval = null;
+    var countdownInterval = null;
+
+    /* ── Inicialização ── */
+    (function init() {
+      var raw = localStorage.getItem('ze_pix_pendente');
+      if (!raw) { location.href = 'index.html'; return; }
+
+      try { pixData = JSON.parse(raw); } catch(e) { location.href = 'index.html'; return; }
+      if (!pixData || !pixData.pixCode) { location.href = 'index.html'; return; }
+
+      /* Preenche valor */
+      var vf = pixData.total ? pixData.total.toFixed(2).replace('.', ',') : '0,00';
+      document.getElementById('px-valor').textContent = 'R$ ' + vf;
+
+      /* QR Code */
+      var qrEl = document.getElementById('px-qr');
+      if (pixData.pixImg) {
+        qrEl.src = pixData.pixImg;
+        qrEl.onerror = function() {
+          this.src = 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=' + encodeURIComponent(pixData.pixCode);
+        };
+      }
+
+      /* Código */
+      document.getElementById('px-code-box').textContent = pixData.pixCode;
+
+      /* Countdown */
+      startCountdown(pixData.createdAt);
+
+      /* Polling */
+      if (pixData.txId) {
+        checkInterval = setInterval(verificarPagamento, 5000);
+      }
+    })();
+
+    /* ── Countdown ── */
+    function startCountdown(createdAt) {
+      var LIMIT = 10 * 60 * 1000; /* 10 min em ms */
+      function tick() {
+        var elapsed = Date.now() - createdAt;
+        var rem = Math.max(0, LIMIT - elapsed);
+        var mins = Math.floor(rem / 60000);
+        var secs = Math.floor((rem % 60000) / 1000);
+        document.getElementById('t-min').textContent = pad(mins);
+        document.getElementById('t-sec').textContent = pad(secs);
+        if (rem === 0) {
+          clearInterval(countdownInterval);
+          setStatus('expired');
+        }
+      }
+      tick();
+      countdownInterval = setInterval(tick, 1000);
+    }
+
+    function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+    /* ── Verificar pagamento ── */
+    async function verificarPagamento() {
+      if (!pixData || !pixData.txId) return;
+      try {
+        var r = await fetch('api/status-pix.php?id=' + pixData.txId);
+        var d = await r.json();
+        var s = (d.status || '').toLowerCase();
+        if (s === 'authorized' || s === 'paid' || s === 'approved' || s === 'completed') {
+          clearInterval(checkInterval);
+          clearInterval(countdownInterval);
+          setStatus('paid');
+          setTimeout(function() {
+            localStorage.removeItem('ze_pix_pendente');
+            CarrinhoData.limpar();
+            window.location.href = 'index.html';
+          }, 2500);
+        }
+      } catch(e) {}
+    }
+
+    /* ── Status card ── */
+    function setStatus(state) {
+      var card = document.getElementById('px-status-card');
+      var icon = document.getElementById('px-status-icon');
+      var text = document.getElementById('px-status-text');
+      var sub  = document.getElementById('px-status-sub');
+      if (state === 'paid') {
+        card.style.background    = '#d4edda';
+        card.style.borderColor   = '#28a745';
+        icon.textContent         = '✅';
+        text.style.color         = '#155724';
+        text.textContent         = 'Pagamento confirmado!';
+        sub.textContent          = 'Seu pedido foi aprovado';
+      } else if (state === 'expired') {
+        card.style.background    = '#fdecea';
+        card.style.borderColor   = '#e53935';
+        icon.textContent         = '❌';
+        text.style.color         = '#b71c1c';
+        text.textContent         = 'PIX expirado';
+        sub.textContent          = 'Volte ao carrinho para tentar novamente';
+      }
+    }
+
+    /* ── Copiar código ── */
+    function copiarCodigo() {
+      if (!pixData || !pixData.pixCode) return;
+      var codigo = pixData.pixCode;
+      function onOk() {
+        var btn = document.getElementById('px-copy-btn');
+        btn.classList.add('copied');
+        btn.innerHTML = '<i class="fa fa-check"></i> Copiado!';
+        setTimeout(function() {
+          btn.classList.remove('copied');
+          btn.innerHTML = '<i class="fa fa-copy"></i> Copiar código Pix';
+        }, 3000);
+      }
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(codigo).then(onOk).catch(function() { fbCopy(codigo, onOk); });
+      } else {
+        fbCopy(codigo, onOk);
+      }
+    }
+
+    function fbCopy(text, cb) {
+      var ta = document.createElement('textarea');
+      ta.value = text; ta.style.position = 'fixed'; ta.style.left = '-9999px';
+      document.body.appendChild(ta); ta.focus(); ta.select();
+      try { document.execCommand('copy'); if (cb) cb(); } catch(e) {}
+      document.body.removeChild(ta);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,356 @@
+/* ===== Zé Delivery Styles - Matching reference site exactly ===== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  color: #403f3f;
+  background: #ffffff;
+  min-height: 100vh;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+a { color: #403f3f; text-decoration: none; }
+
+img {
+  -webkit-user-drag: none;
+  user-drag: none;
+}
+
+/* Header */
+.ze-header { background: #ffffff; }
+.ze-cover {
+  height: 172px;
+  position: relative;
+  background-color: #ffcc01;
+  background-size: auto;
+}
+.ze-borda {
+  height: 65px;
+  border-radius: 40px 40px 0 0;
+  background: #ffffff;
+  position: inherit;
+  top: 110px;
+  z-index: 1;
+}
+.ze-logo {
+  position: absolute;
+  top: 55px;
+  left: calc(50% - 60px);
+  z-index: 5;
+  width: 120px;
+  height: 120px;
+  display: block;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 300px;
+  border: 4px solid white;
+  box-shadow: 0 0 10px rgba(0,0,0,.16);
+  transition: .35s;
+  background: #ffcc01;
+  background-image: url('../images/ze-delivery-logo.jpg');
+  background-size: cover;
+  background-position: center;
+}
+.ze-logo figure { width: 100%; height: 100%; }
+.ze-logo figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: .35s;
+}
+.ze-logo:hover img { transform: scale(1.15); }
+
+.ze-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 5px 30px 0;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.ze-info h1 {
+  font-family: Poppins;
+  font-weight: 700;
+  color: #403f3f !important;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 1.5rem;
+}
+.ze-icons {
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.ze-icons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 45px;
+  width: 45px;
+  border: 2px solid #ffcc01;
+  border-radius: 100px;
+  background: #FFF;
+  color: #ffcc01;
+  font-size: 20px;
+  transition: .2s;
+}
+.ze-icons a:hover {
+  color: #676767;
+  border-color: #676767;
+  box-shadow: 1px 1px 5px rgba(0,0,0,.05);
+}
+.ze-detail {
+  display: flex;
+  flex-direction: row;
+  font-size: small;
+  gap: 10px;
+  padding: 2px 0;
+}
+.ze-alert-success {
+  width: 100%;
+  font-size: 14px;
+  padding: 10px 2.5%;
+  margin: 10px 0;
+  text-align: center;
+  border-radius: 10px;
+  outline: 2px solid #468847;
+  color: #077c22;
+}
+.ze-aberto {
+  padding: 5px 10px;
+  border-radius: 20px;
+  color: #077c22;
+  background-color: #d7fdd7;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+@keyframes btn-pisca {
+  0% { opacity: 0; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+.ze-btn-pisca {
+  animation: btn-pisca .9s linear infinite;
+}
+
+/* Products Grid */
+.ze-container {
+  width: 100%;
+  max-width: 1200px;
+  padding-right: 30px;
+  padding-left: 30px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.ze-section-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #000000;
+}
+.ze-products-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
+.ze-item { width: 100%; }
+.ze-card-link {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+  padding: 10px 15px;
+  background: #FFF;
+  border-radius: 16px;
+  border: 2px solid #cecece;
+  transition: .2s;
+  height: 100%;
+}
+.ze-card-link:hover {
+  background: #f8fafc;
+  border: 2px solid #ffcc01;
+}
+.ze-card-text {
+  display: flex;
+  flex-direction: column;
+  padding-right: 10px;
+}
+.ze-card-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #403f3f;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ze-card-desc {
+  font-size: 14px;
+  color: #403f3f;
+  margin-bottom: 2px;
+  line-height: 1.3;
+}
+.ze-price-line {
+  font-size: 14px;
+  color: #403f3f;
+  line-height: 1.2;
+}
+.ze-card-old-price {
+  color: #ff4d4d;
+  font-weight: bold;
+  text-decoration: line-through;
+  font-size: 14px;
+  line-height: 1.2;
+}
+.ze-card-new-price {
+  font-weight: bold;
+  color: #077c22;
+  font-size: 18px;
+  line-height: 1.3;
+}
+.ze-card-img {
+  display: flex;
+  flex-shrink: 0;
+}
+.ze-card-img figure {
+  width: 110px;
+  height: 110px;
+  border: 1px solid #cecece;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 0;
+}
+.ze-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Footer */
+.ze-footer {
+  background-color: #f5f5f5;
+  border-top: 3px solid #ffcc01;
+  padding: 40px 20px;
+  text-align: center;
+  margin-top: 40px;
+}
+.ze-footer-inner {
+  max-width: 600px;
+  margin: 0 auto;
+}
+.ze-footer h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 10px;
+}
+.ze-footer p {
+  font-size: 14px;
+  color: #403f3f;
+  margin: 5px 0;
+}
+.ze-footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ze-footer-links a {
+  font-size: 14px;
+  color: #403f3f;
+  text-decoration: none;
+}
+.ze-footer-social {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 20px 0;
+}
+.ze-footer-social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  border: 2px solid #ffcc01;
+  border-radius: 50%;
+  color: #ffcc01;
+  font-size: 20px;
+  text-decoration: none;
+}
+.ze-footer-pix {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+.ze-footer-small {
+  font-size: 12px !important;
+}
+
+/* SweetAlert Toast Override */
+.swal2-container.swal2-bottom-end > .swal2-popup.ze-toast {
+  background: #fffbe6;
+  color: #000;
+  border-radius: 18px;
+  padding: 14px 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  max-width: 360px;
+  min-height: 72px;
+}
+.swal2-popup.ze-toast .swal2-title {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: left;
+  line-height: 1.25;
+}
+.swal2-popup.ze-toast .swal2-icon {
+  display: none !important;
+}
+
+/* ===== MOBILE RESPONSIVE ===== */
+@media only screen and (max-width: 767px) {
+  .ze-info h1 {
+    font-size: x-large;
+  }
+  .ze-products-grid {
+    grid-template-columns: 1fr;
+  }
+  .ze-item {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .ze-container {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+  .ze-aberto {
+    position: fixed;
+    left: 10px;
+    top: 10px;
+    z-index: 100;
+  }
+  .ze-icons {
+    gap: 5px;
+  }
+  .ze-icons a {
+    width: 40px;
+    height: 40px;
+  }
+  .ze-card-text {
+    max-width: 220px;
+  }
+}
