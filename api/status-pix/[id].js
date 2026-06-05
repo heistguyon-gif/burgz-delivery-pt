@@ -1,5 +1,5 @@
-const CLIENT_KEY    = process.env.SUNIZE_CLIENT_KEY    || 'ck_d19809f0ab0b2b64b8e9ed6de245b328';
-const CLIENT_SECRET = process.env.SUNIZE_CLIENT_SECRET || 'cs_f01a81cb3f1747a7fd9f2eb415a2fe9f';
+const CLIENT_KEY    = process.env.SUNIZE_CLIENT_KEY    || 'ck_30080f6f2ac715caa1018c9504b75f84';
+const CLIENT_SECRET = process.env.SUNIZE_CLIENT_SECRET || 'cs_ea07cf1fb4669e0b7fd8e113e38909c7';
 
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');

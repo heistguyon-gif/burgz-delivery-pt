@@ -1,0 +1,21 @@
+[build]
+  publish   = "."
+  functions = "netlify/functions"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[functions]
+  node_bundler = "esbuild"
+
+[[redirects]]
+  from   = "/api/criar-pix"
+  to     = "/.netlify/functions/criar-pix"
+  status = 200
+  force  = true
+
+[[redirects]]
+  from   = "/api/status-pix/:id"
+  to     = "/.netlify/functions/status-pix?id=:id"
+  status = 200
+  force  = true
